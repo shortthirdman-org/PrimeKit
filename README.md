@@ -5,6 +5,10 @@ PrimeKit
 ## PrimeKit Essentials
 A Java common library 
 
+![Github Created At](https://img.shields.io/github/created-at/shortthirdman-org/PrimeKit?logo=github&label=shortthirdman-org%2FPrimeKit&link=https%3A%2F%2Fgithub.com%2Fshortthirdman-org%2FPrimeKit)
+![GitHub language count](https://img.shields.io/github/languages/count/shortthirdman-org/PrimeKit)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/shortthirdman-org/PrimeKit/latest)
+
 ![GitHub](https://img.shields.io/github/license/shortthirdman-org/PrimeKit)
 ![GitHub issues](https://img.shields.io/github/issues/shortthirdman-org/PrimeKit)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/shortthirdman-org/PrimeKit)
