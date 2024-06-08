@@ -7,11 +7,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.time.format.TextStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+/**
+ * @apiNote Utility class for operations on {@link LocalDate}, {@link Date}, {@link LocalDateTime}
+ * @author shortthirdman
+ * @since 1.0
+ * https://howtodoinjava.com/java/date-time/date-validation/
+ */
 public final class DateUtils {
 
     private DateUtils() {
@@ -165,5 +176,220 @@ public final class DateUtils {
         SimpleDateFormat formatter = new SimpleDateFormat(format);
         Date date = new Date();
         return formatter.format(date);
+    }
+
+    public static boolean isWeekend(final LocalDate localDate) {
+        DayOfWeek day = DayOfWeek.of(localDate.get(ChronoField.DAY_OF_WEEK));
+        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
+    }
+
+    public static boolean isWeekend(final Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
+    }
+
+    /**
+     * @param localDate the {@link LocalDate} to add days
+     * @param days      the number of business days
+     * @param holidays  the list of holidays
+     * @return the final business day
+     */
+    public static LocalDate addBusinessDays(LocalDate localDate, int days, List<LocalDate> holidays) {
+        if (localDate == null || days <= 0 || holidays.isEmpty()) {
+            throw new IllegalArgumentException("Invalid method argument(s) " + "to addBusinessDays(" + localDate + "," + days + "," + holidays + ")");
+        }
+
+        Predicate<LocalDate> isHoliday = date -> !holidays.isEmpty() && holidays.contains(date);
+
+        Predicate<LocalDate> isWeekend = date
+                -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+                || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+        LocalDate result = localDate;
+        while (days > 0) {
+            result = result.plusDays(1);
+            if (isHoliday.or(isWeekend).negate().test(result)) {
+                days--;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * @param localDate the {@link LocalDate} to subtract days
+     * @param days      the number of business days
+     * @param holidays  the list of holidays
+     * @return the final business day
+     */
+    public static LocalDate subtractBusinessDays(LocalDate localDate, int days, List<LocalDate> holidays) {
+        if (localDate == null || days <= 0 || holidays == null) {
+            throw new IllegalArgumentException("Invalid method argument(s) "
+                    + "to subtractBusinessDays(" + localDate + "," + days + "," + holidays + ")");
+        }
+
+        Predicate<LocalDate> isHoliday = date -> !holidays.isEmpty() && holidays.contains(date);
+
+        Predicate<LocalDate> isWeekend =
+                date -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+                        || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+        LocalDate result = localDate;
+        while (days >= 0) {
+            result = result.minusDays(1);
+            if (isHoliday.or(isWeekend).negate().test(result)) {
+                days--;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * @param start the start date
+     * @param end   the end date
+     * @return the list of dates in between inclusive of both
+     */
+    public static List<LocalDate> datesBetween(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Invalid method argument(s) to datesBetween(" + start + "," + end + ")");
+        }
+
+        // https://howtodoinjava.com/java/date-time/dates-between-two-dates/
+
+        final List<LocalDate> list = start.datesUntil(end)
+                .collect(Collectors.toList());
+
+        return list;
+    }
+
+    public static List<LocalDate> allBusinessDays(final LocalDate startDate, final LocalDate endDate, final List<LocalDate> holidays) {
+        if (startDate == null || endDate == null) {
+            throw new IllegalArgumentException("Invalid method argument(s) to countBusinessDaysBetween ("
+                    + startDate + "," + endDate + "," + holidays + ")");
+        }
+        List<LocalDate> businessDays = List.of();
+
+        // Predicate 1: Is a given date is a holiday
+        Predicate<LocalDate> isHoliday = date -> !holidays.isEmpty() && holidays.contains(date);
+
+        // Predicate 2: Is a given date is a weekday
+        Predicate<LocalDate> isWeekend = date -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+                || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+        // Iterate over stream of all dates and check each day against any weekday or holiday
+        businessDays = startDate.datesUntil(endDate)
+                .filter(isWeekend.or(isHoliday).negate())
+                .collect(Collectors.toList());
+
+        return businessDays;
+    }
+
+    /**
+     * @param startDate the start date
+     * @param endDate the end date
+     * @param holidays the list of holidays
+     * @return the list of dates
+     */
+    public static List<LocalDate> businessDaysBetween(final LocalDate startDate, final LocalDate endDate, final List<LocalDate> holidays) {
+        // Validate method arguments
+        if (startDate == null || endDate == null) {
+            throw new IllegalArgumentException("Invalid method argument(s) to countBusinessDaysBetween(" + startDate
+                            + "," + endDate + "," + holidays + ")");
+        }
+
+        Predicate<LocalDate> isHoliday = date -> !holidays.isEmpty() && holidays.contains(date);
+
+        Predicate<LocalDate> isWeekend = date -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+                || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+
+        return Stream.iterate(startDate, date -> date.plusDays(1))
+                .limit(daysBetween)
+                .filter(isHoliday.or(isWeekend).negate())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @param dateValue the date value in {@link String}
+     * @param formatPattern the date format pattern
+     * @return the parsed {@link LocalDate}
+     */
+    public static LocalDate strictParseDate(String dateValue, String formatPattern) {
+        LocalDate parsedDate = null;
+
+        if (dateValue == null || StringUtils.isBlank(dateValue)) {
+            throw new IllegalArgumentException("Invalid method argument(s) to parseDateStrictly(" + dateValue + ", " + formatPattern + ")");
+        }
+
+        if (formatPattern == null || StringUtils.isBlank(formatPattern)) {
+            formatPattern = "uuuu-MM-dd";
+        }
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatPattern);
+
+        parsedDate = LocalDate.parse(dateValue, dtf.withResolverStyle(ResolverStyle.STRICT));
+
+        return parsedDate;
+    }
+
+    /**
+     * @param dateValue the date value in {@link String}
+     * @param formatPattern the date-time format pattern
+     * @return the parsed {@link LocalDateTime}
+     */
+    public static LocalDateTime strictParseDateTime(String dateValue, String formatPattern) {
+        LocalDateTime parsedDateTime = null;
+        if (dateValue == null || StringUtils.isBlank(dateValue)) {
+            throw new IllegalArgumentException("Invalid method argument(s) to parseDateTimeStrictly(" + dateValue + ", " + formatPattern + ")");
+        }
+
+        if (formatPattern == null || StringUtils.isBlank(formatPattern)) {
+            formatPattern = "uuuu-MM-dd'T'HH:mm:ss.SSSS";
+        }
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatPattern);
+
+        parsedDateTime = LocalDateTime.parse(dateValue, dtf.withResolverStyle(ResolverStyle.STRICT));
+
+        return parsedDateTime;
+    }
+
+    // https://howtodoinjava.com/java/date-time/convert-between-month-name-and-number/
+    public static String monthNumberToShortName(int monthNumber) {
+        return Month.of(monthNumber).getDisplayName(TextStyle.SHORT, Locale.getDefault());
+    }
+
+    public static String monthNumberToFullName(int monthNumber) {
+        return Month.of(monthNumber).getDisplayName(TextStyle.FULL, Locale.getDefault());
+    }
+
+    public static String monthNumberToName(int monthNumber) {
+        return Month.of(monthNumber).name();
+    }
+
+    public static int monthNameToNumber(String monthName) {
+        return Month.valueOf(monthName.toUpperCase()).getValue();
+    }
+
+    public static int monthShortNameToNumber(String abbreviation) {
+        Optional<Month> monthOptional = Arrays.stream(Month.values())
+                .filter(month -> month.name().substring(0, 3).equalsIgnoreCase(abbreviation))
+                .findFirst();
+
+        return monthOptional.orElseThrow(IllegalArgumentException::new).getValue();
+    }
+
+    public static String monthShortNameToFullName(String abbreviation) {
+        Optional<Month> monthOptional = Arrays.stream(Month.values())
+                .filter(month -> month.name().substring(0, 3).equalsIgnoreCase(abbreviation))
+                .findFirst();
+
+        return monthOptional.orElseThrow(IllegalArgumentException::new)
+                .getDisplayName(TextStyle.FULL, Locale.getDefault());
     }
 }

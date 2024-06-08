@@ -270,7 +270,7 @@ public final class BinaryTreeUtils {
      * @param root
      * @return
      */
-    public List<List<Integer>> verticalOrder(TreeNode root) {
+    public static List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
             return result;
@@ -279,10 +279,10 @@ public final class BinaryTreeUtils {
         int[] mm = new int[2];
         getMinMax(root, mm, 0);
 
-        int len = mm[1]-mm[0]+1;
+        int len = mm[1] - mm[0] + 1;
 
         for (int i = 0; i < len; i++) {
-            result.add(new ArrayList<Integer>());
+            result.add(new ArrayList<>());
         }
 
         LinkedList<TreeNode> q1 = new LinkedList<>();
