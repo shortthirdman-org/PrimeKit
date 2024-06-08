@@ -1,0 +1,20 @@
+repo_name: shortthirdman-org/PrimeKit
+report_id: 61253ef6a057d694abc058ee5391acae
+version: 0.1
+repo_type: Public
+timestamp: '2024-06-08T17:23:29+00:00'
+requested_by: shortthirdman
+provider: github
+branch: main
+detected_tools_count: 1
+tools:
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit
+  detection_source: Repo Metadata
