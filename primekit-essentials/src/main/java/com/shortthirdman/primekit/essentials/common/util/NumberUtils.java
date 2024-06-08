@@ -1,6 +1,6 @@
-package com.shortthirdman.sharedlibs.util;
+package com.shortthirdman.primekit.essentials.common.util;
 
-import com.shortthirdman.sharedlibs.common.Constants;
+import com.shortthirdman.primekit.essentials.common.GenericConstants;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -8,12 +8,10 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/**
- * Class provides common functions on number formats.
- * @author shortthirdman
- * @since 1.0.0
- */
-public class NumberUtils {
+public final class NumberUtils {
+
+    private NumberUtils() {
+    }
 
     /**
      * @param amount
@@ -76,8 +74,9 @@ public class NumberUtils {
     }
 
     /**
-     * @param number
-     * @return
+     * @param number the input number object
+     * @param pattern the pattern format
+     * @return the String value of converted number
      */
     public static String changeToDecimalFormat(Object number, String pattern) {
         BigDecimal bdNumber = new BigDecimal(number.toString());
@@ -88,15 +87,15 @@ public class NumberUtils {
     }
 
     /**
-     * @param number
-     * @return
+     * @param number the input number object
+     * @return the double value of converted number
      */
     public static double removeCommasFromNumber(Object number) {
         try {
-            StringBuffer inputNo = new StringBuffer(number.toString());
-            if (inputNo.length() > 0) {
-                while (inputNo.indexOf(Constants.COMMA.toString()) != -1) {
-                    inputNo.deleteCharAt(inputNo.indexOf(Constants.COMMA.toString()));
+            StringBuilder inputNo = new StringBuilder(number.toString());
+            if (!inputNo.isEmpty()) {
+                while (inputNo.indexOf(GenericConstants.COMMA.getValue()) != -1) {
+                    inputNo.deleteCharAt(inputNo.indexOf(GenericConstants.COMMA.getValue()));
                 }
             } else {
                 return 0.0;
@@ -108,46 +107,48 @@ public class NumberUtils {
     }
 
     /**
-     * @param bigDecimalString
-     * @param precision
-     * @return
+     * @param bigDecimalValue the input big decimal value in string
+     * @param precision the precision value
+     * @return the string formatted value
      */
-    public static String changeToRequiredDecimals(String bigDecimalString, int precision) {
-        String newFormattedString = null;
-        String afterDecimal = null;
-        if (bigDecimalString == null || bigDecimalString.length() == 0) {
+    public static String changeToRequiredDecimals(String bigDecimalValue, int precision) {
+        if (bigDecimalValue == null || bigDecimalValue.isEmpty()) {
             return "0.0";
         }
-        if (bigDecimalString.contains(Constants.DOT_PERIOD.toString())) {
-            afterDecimal = bigDecimalString.substring(bigDecimalString
-                    .indexOf(Constants.DOT_PERIOD.toString()) + 1);
+
+        StringBuilder newFormattedString = new StringBuilder();
+        String afterDecimal = null;
+        if (bigDecimalValue.contains(GenericConstants.DOT_PERIOD.getValue())) {
+            afterDecimal = bigDecimalValue.substring(bigDecimalValue
+                    .indexOf(GenericConstants.DOT_PERIOD.getValue()) + 1);
             int length = Math.abs((afterDecimal.length() - precision));
             if (afterDecimal.length() < precision) {
-                newFormattedString = bigDecimalString;
+                newFormattedString = new StringBuilder(bigDecimalValue);
                 for (int i = 0; i < length; i++) {
-                    newFormattedString = newFormattedString + Constants.ZERO;
+                    newFormattedString.append(GenericConstants.ZERO.getValue());
                 }
             } else if (afterDecimal.length() > precision) {
-                newFormattedString = bigDecimalString.substring(0,
-                        bigDecimalString.length() - length);
+                newFormattedString = new StringBuilder(bigDecimalValue.substring(0,
+                        bigDecimalValue.length() - length));
                 if (precision == 0) {
-                    newFormattedString = newFormattedString.substring(0,
-                            newFormattedString.indexOf(Constants.DOT_PERIOD.toString()));
+                    newFormattedString = new StringBuilder(newFormattedString.substring(0,
+                            newFormattedString.toString().indexOf(GenericConstants.DOT_PERIOD.getValue())));
                 } else {
-                    newFormattedString = bigDecimalString;
+                    newFormattedString = new StringBuilder(bigDecimalValue);
                 }
 
             } else {
                 if (precision > 0) {
-                    newFormattedString = bigDecimalString + Constants.DOT_PERIOD;
+                    newFormattedString = new StringBuilder(bigDecimalValue + GenericConstants.DOT_PERIOD.getValue());
                 } else {
-                    newFormattedString = bigDecimalString;
+                    newFormattedString = new StringBuilder(bigDecimalValue);
                 }
                 for (int i = 0; i < precision; i++) {
-                    newFormattedString = newFormattedString + Constants.ZERO;
+                    newFormattedString = new StringBuilder(newFormattedString + GenericConstants.ZERO.getValue());
                 }
             }
         }
-        return newFormattedString;
+
+        return newFormattedString.toString();
     }
 }

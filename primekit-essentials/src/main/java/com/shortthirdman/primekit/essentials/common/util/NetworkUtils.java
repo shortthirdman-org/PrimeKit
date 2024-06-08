@@ -1,26 +1,27 @@
-package com.shortthirdman.sharedlibs.util;
+package com.shortthirdman.primekit.essentials.common.util;
 
 import java.net.*;
 import java.util.*;
 
-public class NetworkUtils {
+public final class NetworkUtils {
 
-    private NetworkUtils() {}
+    private NetworkUtils() {
+    }
 
     /**
      * @return List
      * @throws SocketException
      */
     public static List<NetworkInterface> getAllAvailableInterfaces() throws SocketException {
-        List<NetworkInterface> netInfList = new ArrayList<>();
+        List<NetworkInterface> networkInterfaces = new ArrayList<>();
         NetworkInterface intf;
 
         for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
             intf = en.nextElement();
-            netInfList.add(intf);
+            networkInterfaces.add(intf);
         }
 
-        return netInfList;
+        return networkInterfaces;
     }
 
     /**
@@ -31,10 +32,10 @@ public class NetworkUtils {
         List<NetworkInterface> allInterfaces = new ArrayList<>();
 
         for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements();) {
-            NetworkInterface intf = interfaces.nextElement();
-            allInterfaces.add(intf);
+            NetworkInterface networkInterface = interfaces.nextElement();
+            allInterfaces.add(networkInterface);
 
-            Enumeration<NetworkInterface> subInterfaces = intf.getSubInterfaces();
+            Enumeration<NetworkInterface> subInterfaces = networkInterface.getSubInterfaces();
 
             if (subInterfaces.hasMoreElements()) {
                 while (subInterfaces.hasMoreElements()) {
@@ -50,7 +51,7 @@ public class NetworkUtils {
 
     /**
      * Get all the interfaces which are not loopback ones
-     * 
+     *
      * @return Set
      */
     public static Set<NetworkInterface> getAllLocalInterfaces() {
@@ -116,9 +117,9 @@ public class NetworkUtils {
             NetworkInterface ni = niEnum.nextElement();
             if (!ni.isLoopback()) {
                 for (InterfaceAddress interfaceAddress : ni.getInterfaceAddresses()) {
-                    InetAddress bcast = interfaceAddress.getBroadcast();
-                    if (bcast != null) {
-                        result = bcast.toString().substring(1);
+                    InetAddress broadcast = interfaceAddress.getBroadcast();
+                    if (broadcast != null) {
+                        result = broadcast.toString().substring(1);
                         break;
                     }
                 }
@@ -192,10 +193,8 @@ public class NetworkUtils {
      * @throws IllegalArgumentException
      */
     public static void isValidInetAddress(String ipAddress) throws IllegalArgumentException {
-
-        // Opened issue #84 to track proper validation
         if (ipAddress == null || ipAddress.isEmpty()) {
-            throw new IllegalArgumentException("IP is missing or empty");
+            throw new IllegalArgumentException("IP address is missing or empty");
         }
 
         if (ipAddress.contains(":")) {
@@ -208,8 +207,8 @@ public class NetworkUtils {
             // it appears to be literal IP, its safe to use the getByName method
             try {
                 InetAddress address = InetAddress.getByName(ipAddress);
-            } catch (UnknownHostException e) {
-                throw new IllegalArgumentException(e);
+            } catch (UnknownHostException uhe) {
+                throw new RuntimeException(uhe);
             }
         }
     }

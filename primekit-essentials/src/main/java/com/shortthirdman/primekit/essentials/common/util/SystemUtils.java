@@ -1,12 +1,13 @@
-package com.shortthirdman.sharedlibs.util;
+package com.shortthirdman.primekit.essentials.common.util;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class SystemUtils {
+public final class SystemUtils {
 
-    private SystemUtils() {}
+    private SystemUtils() {
+    }
 
     /**
      * Returns the free Java Virtual Machine memory in bytes
@@ -14,8 +15,7 @@ public class SystemUtils {
      */
     public static long getFreeMemory() {
         Runtime runtime = Runtime.getRuntime();
-        long freeMemory = runtime.freeMemory();
-        return freeMemory;
+        return runtime.freeMemory();
     }
 
     /**
@@ -24,8 +24,7 @@ public class SystemUtils {
      */
     public static long getMaxMemory() {
         Runtime runtime = Runtime.getRuntime();
-        long maxMemory = runtime.maxMemory();
-        return maxMemory;
+        return runtime.maxMemory();
     }
 
     /**
@@ -34,8 +33,7 @@ public class SystemUtils {
      */
     public static long getTotalMemory() {
         Runtime runtime = Runtime.getRuntime();
-        long totalMemory = runtime.totalMemory();
-        return totalMemory;
+        return runtime.totalMemory();
     }
 
     /**
@@ -52,8 +50,7 @@ public class SystemUtils {
 
         String[] command = { "taskkill", "/F", "/T", "/PID", Integer.toString(pid) };
         if (System.getProperty("os.name").startsWith("Linux")) {
-            String[] cmd = { "kill", "-9", Integer.toString(pid) };
-            command = cmd;
+            command = new String[]{ "kill", "-9", Integer.toString(pid) };
         }
 
         try {
@@ -62,7 +59,7 @@ public class SystemUtils {
             System.out.println("Killed pid " + pid + " exitValue: " + result);
 
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unknown error caught while killing process: " + e.getMessage());
         }
     }
 
@@ -120,7 +117,7 @@ public class SystemUtils {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unknown error caught while getting PID of Windows machine: " + e.getMessage());
         }
 
         return 0;
@@ -164,7 +161,7 @@ public class SystemUtils {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unknown error caught while getting PID of Linux machine: " + e.getMessage());
         }
 
         return 0;

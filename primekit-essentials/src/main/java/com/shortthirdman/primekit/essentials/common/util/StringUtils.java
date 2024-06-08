@@ -1,24 +1,15 @@
-package com.shortthirdman.sharedlibs.util;
+package com.shortthirdman.primekit.essentials.common.util;
 
-import com.shortthirdman.sharedlibs.common.Constants;
+import com.shortthirdman.primekit.essentials.common.GenericConstants;
 
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Utility class for manipulation with String class
- *
- * @version 1.0
- * @author shortthirdman-org
- */
-public class StringUtils {
+public final class StringUtils {
 
-    private StringUtils() {}
+    private StringUtils() {
+    }
 
     /**
      * Convert a snake-case text string to camel-case
@@ -26,14 +17,14 @@ public class StringUtils {
      * @apiNote Capitalize first letter of string. Replace the first occurrence of
      *          letter that present after the underscore, to capitalize form of next
      *          letter of underscore
-     * @param text
+     * @param text the input string to convert
      * @return the camel-case converted text string
      */
     public static String snakeToCamel(String text) {
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
-        while (text.contains(Constants.UNDERSCORE.toString())) {
+        while (text.contains(GenericConstants.UNDERSCORE.getValue())) {
             text = text.replaceFirst("_[a-z]",
-                    String.valueOf(Character.toUpperCase(text.charAt(text.indexOf(Constants.UNDERSCORE.toString()) + 1))));
+                    String.valueOf(Character.toUpperCase(text.charAt(text.indexOf(GenericConstants.UNDERSCORE.getValue()) + 1))));
         }
         return text;
     }
@@ -78,13 +69,15 @@ public class StringUtils {
      * @return
      */
     public static List<String> convertToList(String delimitedText, String delimiter) {
-        List<String> result = new ArrayList<>();
+        List<String> result = List.of();
+
         try {
             String[] commaSeparatedArr = delimitedText.split(delimiter);
             result = Arrays.stream(commaSeparatedArr).collect(Collectors.toList());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unexpected error caught while converting input text to list: " + e.getMessage());
         }
+
         return result;
     }
 
@@ -199,12 +192,18 @@ public class StringUtils {
      * @return true, if any char is greater than u007f, false otherwise
      */
     public static boolean containsNonAscii(String source) {
+        if (source == null) {
+            throw new IllegalArgumentException("");
+        }
+
         source = Normalizer.normalize(source, Normalizer.Form.NFD);
+
         for (char c : source.toCharArray()) {
             if (c >= '\u007F') {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -253,20 +252,20 @@ public class StringUtils {
      * @return the right partitioned byte array from source
      */
     private static byte[] getRightPartitionBytes(final byte[] src, final int len, final byte fill) {
-        byte[] des = new byte[len];
+        byte[] result = new byte[len];
 
         int lLen = Math.min(src.length, len);
         int rLen = Math.max(src.length, len);
 
         for (int i = 0; i < lLen; i++) {
             if (i < lLen) {
-                des[i] = src[i];
+                result[i] = src[i];
             } else {
-                des[i] = fill;
+                result[i] = fill;
             }
         }
 
-        return des;
+        return result;
     }
 
     /**

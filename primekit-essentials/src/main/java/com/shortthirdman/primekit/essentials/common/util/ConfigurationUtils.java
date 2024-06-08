@@ -1,18 +1,20 @@
-package com.shortthirdman.sharedlibs.util;
+package com.shortthirdman.primekit.essentials.common.util;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class PropertiesConfigUtils {
+public final class ConfigurationUtils {
 
-    private static Map<String, Properties> propertiesConfigMap = new HashMap<>();
+    private ConfigurationUtils() {
+    }
+
+    private static final Map<String, Properties> propertiesConfigMap = new LinkedHashMap<>();
 
     /**
      * Loads all the configuration properties from the file name
@@ -26,17 +28,18 @@ public class PropertiesConfigUtils {
             fileName = propertiesKey + ".properties";
         }
         try (InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)) {
-            // 获得properties文件名称
-            assert input != null;
+            if (Objects.isNull(input)) {
+                throw new IllegalStateException(propertiesKey + ".properties load failed, reason: ");
+            }
             try (Reader reader = new InputStreamReader(input, StandardCharsets.UTF_8)) {
                 config = new Properties();
                 config.load(reader);
                 propertiesConfigMap.put(propertiesKey, config);
             } catch (Exception e) {
-                Logger.getGlobal().log(Level.WARNING, propertiesKey + ".properties error:", e);
+                throw new IllegalStateException(propertiesKey + ".properties error: " + e.getMessage());
             }
         } catch (Exception e) {
-            Logger.getGlobal().log(Level.WARNING, propertiesKey + ".properties load failed, reason:", e);
+//            Logger.getGlobal().log(Level.WARNING, propertiesKey + ".properties load failed, reason:", e);
             return config;
         }
         return config;

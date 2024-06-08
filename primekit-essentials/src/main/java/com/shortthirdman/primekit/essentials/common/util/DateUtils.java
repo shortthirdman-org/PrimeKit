@@ -294,6 +294,7 @@ public final class DateUtils {
      * @param holidays the list of holidays
      * @return the list of dates
      */
+    @Deprecated(forRemoval = true, since = "1.0.0")
     public static List<LocalDate> businessDaysBetween(final LocalDate startDate, final LocalDate endDate, final List<LocalDate> holidays) {
         // Validate method arguments
         if (startDate == null || endDate == null) {
@@ -359,7 +360,6 @@ public final class DateUtils {
         return parsedDateTime;
     }
 
-    // https://howtodoinjava.com/java/date-time/convert-between-month-name-and-number/
     public static String monthNumberToShortName(int monthNumber) {
         return Month.of(monthNumber).getDisplayName(TextStyle.SHORT, Locale.getDefault());
     }

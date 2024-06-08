@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DateUtilsTest {
@@ -154,5 +155,47 @@ public class DateUtilsTest {
 
         LocalDateTime expectedValue3 = LocalDateTime.of(2019, 2, 27, 11, 23, 56, 1234);
         assertEquals(expectedValue3, DateUtils.strictParseDateTime("2019-02-29T11:23:56.1234", null));
+    }
+
+    @Test
+    public void givenMonthNumber_monthShortName() {
+        assertEquals("Jan", DateUtils.monthNumberToShortName(1));
+        assertNotEquals("JAN", DateUtils.monthNumberToShortName(1));
+        assertNotNull(DateUtils.monthNumberToShortName(1));
+
+        assertEquals("Jun", DateUtils.monthNumberToShortName(6));
+        assertNotEquals("JUN", DateUtils.monthNumberToShortName(6));
+        assertNotNull(DateUtils.monthNumberToShortName(6));
+    }
+
+    @Test
+    public void givenMonthNumber_monthFullName() {
+        assertEquals("January", DateUtils.monthNumberToFullName(1));
+        assertNotEquals("JANUARY", DateUtils.monthNumberToFullName(1));
+        assertNotNull(DateUtils.monthNumberToFullName(1));
+    }
+
+    @Test
+    public void givenMonthNumber_monthName() {
+        assertEquals("JANUARY", DateUtils.monthNumberToName(1));
+        assertNotEquals("January", DateUtils.monthNumberToName(1));
+        assertNotNull(DateUtils.monthNumberToName(1));
+    }
+
+    @Test
+    public void givenMonthShortName_convertMonthNumber() {
+        assertEquals(1, DateUtils.monthShortNameToNumber("Jan"));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.monthShortNameToNumber("Duy"));
+    }
+
+    @Test
+    public void givenMonthFullName_convertMonthNumber() {
+        assertEquals(1, DateUtils.monthNameToNumber("January"));
+    }
+
+    @Test
+    public void givenMonthShortName_convertFullName() {
+        assertEquals("January", DateUtils.monthShortNameToFullName("Jan"));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.monthShortNameToFullName("Fut"));
     }
 }
