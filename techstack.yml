@@ -1,13 +1,78 @@
 repo_name: shortthirdman-org/PrimeKit
-report_id: 61253ef6a057d694abc058ee5391acae
+report_id: 1c35374bcba36735c57e49bcdc75aac6
 version: 0.1
 repo_type: Public
-timestamp: '2024-06-08T17:23:29+00:00'
+timestamp: '2024-06-08T18:21:41+00:00'
 requested_by: shortthirdman
 provider: github
 branch: main
-detected_tools_count: 1
+detected_tools_count: 31
 tools:
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit
+  detection_source: Repo Metadata
+- name: Spring Framework
+  description: An application framework and inversion of control container for the
+    Java platform
+  website_url: https://spring.io/projects/spring-framework
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: PostgreSQL
+  description: A powerful, open source object-relational database system
+  website_url: http://www.postgresql.org/
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1028/ASOhU5xJ.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: Spring Data
+  description: Provides a consistent approach to data access – relational, non-relational,
+    map-reduce, and beyond
+  website_url: https://spring.io/projects/spring-data
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/7624/IG6D4Ro2_400x400.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: Apache Maven
+  description: Apache build manager for Java projects.
+  website_url: http://maven.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Java Build Tools
+  image_url: https://img.stackshare.io/package_manager/977/default_9833f2ef0bbc2a946b4cc5e9307264033361076b.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/.mvn/maven.config
+  detection_source: primekit-essentials/.mvn/maven.config
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
 - name: Git
   description: Fast, scalable, distributed revision control system
   website_url: http://git-scm.com/
@@ -18,3 +83,339 @@ tools:
   image_url: https://img.stackshare.io/service/1046/git.png
   detection_source_url: https://github.com/shortthirdman-org/PrimeKit
   detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/.github/workflows/codeql.yml
+  detection_source: ".github/workflows/codeql.yml"
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: JUnit
+  description: A programmer-oriented testing framework for Java
+  website_url: http://junit.org/
+  license: EPL-1.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/2020/874086.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework.security:spring-security-core
+  description: Spring-security-core
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+  vulnerabilities:
+  - name: Broken Access Control in Spring Security With Direct Use of isFullyAuthenticated
+    cve_id: CVE-2024-22234
+    cve_url: https://github.com/advisories/GHSA-w3w6-26f2-p474
+    detected_date: Feb 21
+    severity: high
+    first_patched: 6.1.7
+  - name: Erroneous authentication pass in Spring Security
+    cve_id: CVE-2024-22257
+    cve_url: https://github.com/advisories/GHSA-f3jh-qvm4-mg39
+    detected_date: Mar 19
+    severity: high
+    first_patched: 6.1.8
+- name: com.fasterxml.jackson.core:jackson-annotations
+  description: Core annotations used for value types
+  version: 2.15.4
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: com.fasterxml.jackson.core:jackson-core
+  description: Core Jackson processing abstractions
+  version: 2.15.4
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: commons-codec:commons-codec
+  description: The Apache Commons Codec package contains simple encoder and decoders
+    for various formats such as Base64 and Hexadecimal
+  version: '1.15'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: commons-io:commons-io
+  description: The Apache Commons IO library contains utility classes
+  version: 2.11.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.apache.commons:commons-lang3
+  description: Apache Commons Lang
+  version: 3.12.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.hibernate.common:hibernate-commons-annotations
+  description: Common reflection code used in support of annotation processing
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.hibernate:hibernate-core
+  description: Hibernate's core ORM functionality
+  license: LGPL-2.0-only,GPL-3.0-or-later
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.junit.jupiter:junit-jupiter-api
+  description: Module "junit-jupiter-api" of JUnit 5
+  version: 5.10.2
+  license: EPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.junit.jupiter:junit-jupiter-engine
+  description: Module "junit-jupiter-engine" of JUnit 5
+  version: 5.10.2
+  license: EPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.junit.jupiter:junit-jupiter-params
+  description: Module "junit-jupiter-params" of JUnit 5
+  version: 5.10.2
+  license: EPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.junit.platform:junit-platform-runner
+  description: Module "junit-platform-runner" of JUnit 5
+  version: 1.10.2
+  license: EPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.postgresql:postgresql
+  description: The PostgreSQL Driver JDBC4
+  version: 42.7.3
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.projectlombok:lombok
+  description: 'Spice up your java: Automatic Resource Management'
+  version: 1.18.30
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework.data:spring-data-commons
+  description: Global parent pom.xml to be used by Spring Data modules
+  version: 3.2.5
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework.data:spring-data-jpa
+  description: Spring Data module for JPA repositories
+  version: 3.2.5
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-aop
+  description: Spring AOP
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-beans
+  description: Spring Beans
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-context
+  description: Spring Context
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-context-support
+  description: Spring Context Support
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-core
+  description: Spring Core
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-web
+  description: Spring Web
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
+- name: org.springframework:spring-webmvc
+  description: Spring Web MVC
+  version: 6.1.6
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/shortthirdman-org/PrimeKit/blob/main/primekit-essentials/pom.xml
+  detection_source: primekit-essentials/pom.xml
+  last_updated_by: Swetank Mohanty
+  last_updated_on: 2024-06-08 18:03:01.000000000 Z
