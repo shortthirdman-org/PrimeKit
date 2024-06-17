@@ -5,10 +5,7 @@ import com.shortthirdman.primekit.essentials.common.util.DateUtils;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -197,5 +194,30 @@ public class DateUtilsTest {
     public void givenMonthShortName_convertFullName() {
         assertEquals("January", DateUtils.monthShortNameToFullName("Jan"));
         assertThrows(IllegalArgumentException.class, () -> DateUtils.monthShortNameToFullName("Fut"));
+    }
+
+    @Test
+    public void givenLocalDate_getQuarter() {
+        LocalDate date = LocalDate.of(2024, Month.FEBRUARY, 19);
+        assertEquals(1, DateUtils.getQuarterNumber(date));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.getQuarterNumber(null));
+    }
+
+    @Test
+    public void givenLocalDate_getFormattedQuarter() {
+        LocalDate date = LocalDate.of(2024, Month.FEBRUARY, 19);
+        assertEquals("Q1", DateUtils.shortQuarterNumber(date));
+        assertEquals("1st quarter", DateUtils.longQuarterNumber(date));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.shortQuarterNumber(null));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.longQuarterNumber(null));
+    }
+
+    @Test
+    public void givenStartDate_givenEndDate_getQuarterCount() {
+        LocalDate start = LocalDate.of(2024, Month.FEBRUARY, 19);
+        LocalDate end = LocalDate.of(2024, Month.MAY, 5);
+        assertEquals(1, DateUtils.quarterCount(start, end));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.quarterCount(null, end));
+        assertThrows(IllegalArgumentException.class, () -> DateUtils.quarterCount(start, null));
     }
 }
