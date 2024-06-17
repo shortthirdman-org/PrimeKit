@@ -47,7 +47,7 @@ tools:
   last_updated_by: Swetank Mohanty
   last_updated_on: 2024-06-08 18:03:01.000000000 Z
 - name: Spring Data
-  description: Provides a consistent approach to data access â€“ relational, non-relational,
+  description: Provides a consistent approach to data access – relational, non-relational,
     map-reduce, and beyond
   website_url: https://spring.io/projects/spring-data
   license: Apache-2.0
