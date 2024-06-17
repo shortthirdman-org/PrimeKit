@@ -19,7 +19,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
 	<maven.compiler.release>${java.version}</maven.compiler.release>
 	<lombok.version>1.18.30</lombok.version>
-	<springframework.version>6.1.6</springframework.version>
+	<springframework.version>6.1.8</springframework.version>
 	<spring-data.version>3.2.5</spring-data.version>
 	<fasterxml-jackson.version>2.15.4</fasterxml-jackson.version>
 	<jakarta.xml-bind.version>4.0.2</jakarta.xml-bind.version>
