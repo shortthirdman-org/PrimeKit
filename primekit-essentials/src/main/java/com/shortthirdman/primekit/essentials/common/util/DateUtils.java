@@ -1,5 +1,6 @@
 package com.shortthirdman.primekit.essentials.common.util;
 
+import com.shortthirdman.primekit.essentials.common.YearWeek;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
@@ -444,5 +445,101 @@ public final class DateUtils {
         }
 
         return date.get(IsoFields.QUARTER_OF_YEAR);
+    }
+
+    /**
+     * Split date-time range into equal intervals
+     * @param start the start date
+     * @param end the end date
+     * @param n the intervals
+     * @return list of date-time
+     */
+    public static List<LocalDateTime> splitDateTimeRange(LocalDateTime start, LocalDateTime end, int n) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start date or end date can not be null");
+        }
+
+        Duration range = Duration.between(start, end);
+        Duration interval = range.dividedBy(n - 1);
+        List<LocalDateTime> listOfDates = new ArrayList<>();
+        LocalDateTime timeline = start;
+        for (int i = 0; i < n - 1; i++) {
+            listOfDates.add(timeline);
+            timeline = timeline.plus(interval);
+        }
+        listOfDates.add(end);
+        return listOfDates;
+    }
+
+    /**
+     * Split date-time range into days
+     * @param start the start date
+     * @param end the end date
+     * @return list of date
+     */
+    public static List<LocalDate> splitDateRangeIntoDays(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start date or end date can not be null");
+        }
+
+        long numOfDaysBetween = ChronoUnit.DAYS.between(start, end);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(start::plusDays)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Split date-time range into months
+     * @param start the start date
+     * @param end the end date
+     * @return list of year-month
+     */
+    public static List<YearMonth> splitDateRangeIntoMonths(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start date or end date can not be null");
+        }
+
+        long numOfDaysBetween = ChronoUnit.MONTHS.between(start, end);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(i -> YearMonth.from(start.plusMonths(i)))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Split date-time range into years
+     * @param start the start date
+     * @param end the end date
+     * @return the list of years
+     */
+    public static List<Year> splitDateRangeIntoYears(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start date or end date can not be null");
+        }
+
+        long numOfDaysBetween = ChronoUnit.YEARS.between(start, end);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(i -> Year.from(start.plusYears(i)))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Split date-time range into weeks
+     * @param start the start date
+     * @param end the end date
+     * @return the list of year-week
+     */
+    public static List<YearWeek> splitDateRangeIntoWeeks(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start date or end date can not be null");
+        }
+
+        long numOfDaysBetween = ChronoUnit.WEEKS.between(start, end);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(i -> YearWeek.from(start.plusWeeks(i)))
+                .collect(Collectors.toList());
     }
 }
