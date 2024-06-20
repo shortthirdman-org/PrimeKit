@@ -1,12 +1,24 @@
-# PrimeKit
+# PrimeKit Essentials
 
 [![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/shortthirdman-org/prime-kit)
 
-PrimeKit
+Welcome to PrimeKit Essentials, an innovative project designed to enhance your development toolkit and streamline your workflow. Whether you're a seasoned developer or just starting out, PrimeKit Essentials offers essential functionalities that empower your development journey.
 
-## PrimeKit Essentials
+## Key Features
 
-A Java common library 
+- **Efficiency:** Boost productivity with optimized tools tailored for developers.
+- **Versatility:** From project management to coding essentials, PrimeKit has you covered.
+- **User-friendly:** Enjoy an intuitive design for a seamless experience.
+
+## Get Started
+
+Dive in and explore how PrimeKit Essentials can transform your development process. Visit our [PrimeKit Essentials](https://www.github.com/shortthirdman-org/PrimeKit) to learn more.
+
+Your feedback and support are invaluable to us. Let's empower developers together!
+
+---
+
+*PrimeKit Essentials is open-source and welcomes contributions from the community.*
 
 ![Github Created At](https://img.shields.io/github/created-at/shortthirdman-org/PrimeKit?logo=github&label=shortthirdman-org%2FPrimeKit&link=https%3A%2F%2Fgithub.com%2Fshortthirdman-org%2FPrimeKit)
 ![GitHub language count](https://img.shields.io/github/languages/count/shortthirdman-org/PrimeKit)
@@ -15,8 +27,7 @@ A Java common library
 ![GitHub](https://img.shields.io/github/license/shortthirdman-org/PrimeKit)
 ![GitHub issues](https://img.shields.io/github/issues/shortthirdman-org/PrimeKit)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/shortthirdman-org/PrimeKit)
-![GitHub Workflow Status (with event and branch)](https://img.shields.io/github/actions/workflow/status/shortthirdman-org/PrimeKit/release.yml?event=push&branch=main)
-
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/shortthirdman-org/PrimeKit/maven.yml?branch=main)
 
 ## Tech Stack
 
