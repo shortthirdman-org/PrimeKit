@@ -4,6 +4,8 @@
 
 Welcome to PrimeKit Essentials, an innovative project designed to enhance your development toolkit and streamline your workflow. Whether you're a seasoned developer or just starting out, PrimeKit Essentials offers essential functionalities that empower your development journey.
 
+This library provides a comprehensive collection of utility methods across various categories to simplify and enhance Java application development. It includes functionalities for string manipulation, data structures, file handling, mathematical operations, date/time utilities, and more. Whether you're building a web application, command-line tool, or enterprise system, this library aims to streamline your development process by offering reusable, well-tested utility methods that adhere to best practices and Java standards.
+
 ## Key Features
 
 - **Efficiency:** Boost productivity with optimized tools tailored for developers.
