@@ -1,0 +1,85 @@
+{
+  "name": "United States of America",
+  "topLevelDomain": [
+    ".us"
+  ],
+  "alpha2Code": "US",
+  "alpha3Code": "USA",
+  "callingCodes": [
+    "1"
+  ],
+  "capital": "Washington, D.C.",
+  "altSpellings": [
+    "US",
+    "USA",
+    "United States of America"
+  ],
+  "region": "Americas",
+  "subregion": "Northern America",
+  "population": 323947000,
+  "latlng": [
+    38,
+    -97
+  ],
+  "demonym": "American",
+  "area":  9629091,
+  "gini":  48,
+  "timezones": [
+    "UTC-12:00",
+    "UTC-11:00",
+    "UTC-10:00",
+    "UTC-09:00",
+    "UTC-08:00",
+    "UTC-07:00",
+    "UTC-06:00",
+    "UTC-05:00",
+    "UTC-04:00",
+    "UTC+10:00",
+    "UTC+12:00"
+  ],
+  "borders": [
+    "CAN",
+    "MEX"
+  ],
+  "nativeName": "United States",
+  "numericCode":  "840",
+  "currencies": [
+    {
+      "code": "USD",
+      "name": "United States dollar",
+      "symbol": "$"
+    }
+  ],
+  "languages": [
+    {
+      "iso639_1": "en",
+      "iso639_2": "eng",
+      "name": "English",
+      "nativeName": "English"
+    }
+  ],
+  "translations": {
+    "br": "Estados Unidos",
+    "de": "Vereinigte Staaten von Amerika",
+    "es": "Estados Unidos",
+    "fa": "u0627u06ccu0627u0644 u0627u062a u0645u062au062d u062fu0647 u0622u0645u0631 u06ccu06a9u0627",
+    "fr": "u00c9tats-Unis",
+    "hr": "Sjedinjene Ameriu010dke Dru017eave",
+    "it": "Stati Uniti Du0027 America",
+    "ja": "u30a2u30e1u30eau30ab u5408u8846u56fd",
+    "nl": "Verenigde Staten",
+    "pt": "Estados Unidos"
+  },
+  "flag": "https://api.countrylayer.com/v2/",
+  "regionalBlocs": [
+    {
+      "acronym": "NAFTA",
+      "name": "North American Free Trade Agreement",
+      "otherNames": [
+        "Tratado de Libre Comercio de Amu00e9rica del Norte",
+        "Accord de Libre- u00e9change Nord-Am u00e9ricain"
+      ]
+    }
+  ],
+  "cioc":  "USA"
+}
