@@ -6,6 +6,11 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Utility class for string manipulation
+ * @author ShortThirdMan
+ * @version 1.0.0
+ */
 public final class StringUtils {
 
     private StringUtils() {
@@ -21,6 +26,9 @@ public final class StringUtils {
      * @return the camel-case converted text string
      */
     public static String snakeToCamel(String text) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("Source text cannot be null or empty");
+        }
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
         while (text.contains(GenericConstants.UNDERSCORE.getValue())) {
             text = text.replaceFirst("_[a-z]",
@@ -38,6 +46,9 @@ public final class StringUtils {
      * @return snake-case converted text string
      */
     public static String camelToSnake(String text) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("Source text cannot be null or empty");
+        }
         String regex = "([a-z])([A-Z]+)";
         String replacement = "$1_$2";
         text = text.replaceAll(regex, replacement).toLowerCase();
@@ -49,7 +60,7 @@ public final class StringUtils {
      *
      * @param text the input string to convert
      * @param upper true if result snake cased string should be upper cased
-     * @return
+     * @return snake-case converted text string
      */
     public static String camelToSnake(final String text, final boolean upper) {
         String ret = text.replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2").replaceAll("([a-z])([A-Z])", "$1_$2");
@@ -64,9 +75,9 @@ public final class StringUtils {
     /**
      * Converts a delimited text string into list of string
      *
-     * @param delimitedText
-     * @param delimiter
-     * @return
+     * @param delimitedText the input delimited text string
+     * @param delimiter the delimiter used to split the text
+     * @return the list of strings
      */
     public static List<String> convertToList(String delimitedText, String delimiter) {
         List<String> result = List.of();
@@ -82,6 +93,7 @@ public final class StringUtils {
     }
 
     /**
+     * Trims the input text and returns the trimmed value.
      * @param textValue the source input text to trim
      * @return the trimmed value
      */
@@ -135,7 +147,7 @@ public final class StringUtils {
     /**
      * Helper method to convert a byte[] array (such as a MsgId) to a hex string
      *
-     * @param array
+     * @param array the input array
      * @return hex string
      */
     public static String arrayToHexString(byte[] array) {
@@ -155,9 +167,9 @@ public final class StringUtils {
     /**
      * Convert a byte[] array (such as a MsgId) to a hex string
      *
-     * @param array
-     * @param offset
-     * @param limit
+     * @param array the input array
+     * @param offset the offset size
+     * @param limit the limit size
      * @return hex string
      */
     public static String arrayToHexString(byte[] array, int offset, int limit) {
@@ -207,6 +219,13 @@ public final class StringUtils {
         return false;
     }
 
+    /**
+     * Convert ASCII to hex byte array
+     * @param src the source byte array
+     * @param len the length of source bytes
+     * @param padding the padding type length
+     * @return the converted hex byte array
+     */
     public static byte[] asciiToHex(byte[] src, int len, int padding) {
         byte[] asc;
 
@@ -229,6 +248,13 @@ public final class StringUtils {
         return bcd;
     }
 
+    /**
+     * Calculates the left partitioned byte array from source
+     * @param src the source byte array
+     * @param len the length of source bytes
+     * @param fill the fill byte character
+     * @return the left partitioned byte array from source
+     */
     private static byte[] getLeftPartitionBytes(final byte[] src, final int len, final byte fill) {
         byte[] des = new byte[len];
 
@@ -246,6 +272,7 @@ public final class StringUtils {
     }
 
     /**
+     * Calculates the right partitioned byte array from source
      * @param src the source byte array
      * @param len the length of source bytes
      * @param fill the fill byte character
@@ -286,5 +313,101 @@ public final class StringUtils {
         }
 
         return re;
+    }
+
+    /**
+     * Returns the first non-null and non-blank string from the given values.
+     * @param values the input arguments
+     * @return the first non-null and non-blank string
+     */
+    public static String coalesce(String... values) {
+        return Arrays.stream(values)
+                .filter(s -> s != null && !s.isBlank())
+                .findFirst()
+                .orElse("");
+    }
+
+    /**
+     * Joins a list of strings into a comma-separated string.
+     * @param items the input list of items
+     * @return the comma separated string
+     */
+    public static String joinWithComma(List<String> items) {
+        return items == null ? "" : String.join(", ", items);
+    }
+
+    /**
+     * Wraps the given value with double quotes.
+     * @param value the input value
+     * @return the value wrapped with double quotes
+     */
+    public static String wrapWithQuotes(String value) {
+        return "\"" + value + "\"";
+    }
+
+    /**
+     * Wraps a nullable value into an {@link java.util.Optional}.
+     * @param value the input value
+     * @param <T> the type of the value
+     * @return an {@link java.util.Optional} containing the value if it's not null, otherwise an empty Optional
+     */
+    public static <T> Optional<T> asOptional(T value) {
+        return Optional.ofNullable(value);
+    }
+
+    /**
+     * Checks if a string is a palindrome.
+     * @param input the input string
+     * @return true if the string is a palindrome, false otherwise
+     */
+    public static boolean isPalindrome(String input) {
+        if (input == null) return false;
+        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        return new StringBuilder(clean).reverse().toString().equals(clean);
+    }
+
+    /**
+     * Generates a random alphanumeric string of the given length.
+     * @param length the length of the string to generate
+     * @return the generated random alphanumeric string
+     */
+    public static String generateRandomAlphanumeric(int length) {
+        if (length <= 0) {
+            throw new IllegalArgumentException("Length must be greater than 0");
+        }
+
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return new Random().ints(length, 0, chars.length())
+                .mapToObj(chars::charAt)
+                .map(Object::toString)
+                .collect(Collectors.joining());
+    }
+
+    /**
+     * Checks whether a string is null or blank (empty or whitespace only).
+     * @param input the input string
+     * @return true if the string is null or blank, false otherwise
+     */
+    public static boolean isNullOrBlank(String input) {
+        return input == null || input.isBlank();
+    }
+
+    /**
+     * Converts the first letter to uppercase and leaves the rest unchanged.
+     * @param input the input string
+     * @return the string with the first letter capitalized
+     */
+    public static String capitalize(String input) {
+        if (isNullOrBlank(input)) return input;
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+
+    /**
+     * Safely converts an object to a string, returning an empty string if null.
+     * @param obj the object to convert
+     * @return the string representation of the object, or an empty string if null
+     */
+    public static String safeToString(Object obj) {
+        return Optional.ofNullable(obj).map(Object::toString).orElse("");
     }
 }
