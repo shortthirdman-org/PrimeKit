@@ -13,6 +13,10 @@ public final class MathUtils {
      * @return
      */
     public static double variance(double[] array, int n) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("array is null or empty");
+        }
+
         double sum = 0;
         for (int i = 0; i < n; i++)
             sum += array[i];
@@ -33,6 +37,9 @@ public final class MathUtils {
      * @return
      */
     public static double standardDeviation(double[] array, int n) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("array is null or empty");
+        }
         return Math.sqrt(variance(array, n));
     }
 
@@ -44,6 +51,9 @@ public final class MathUtils {
      * @return
      */
     public static double average(double[] array, int n) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("array is null or empty");
+        }
         double sum = 0;
         double finalsum = 0;
         for (double i : array) {

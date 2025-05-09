@@ -199,7 +199,7 @@ public final class DateUtils {
      * @return the final business day
      */
     public static LocalDate addBusinessDays(LocalDate localDate, int days, List<LocalDate> holidays) {
-        if (localDate == null || days <= 0 || holidays.isEmpty()) {
+        if (localDate == null || days <= 0) { //|| holidays.isEmpty()
             throw new IllegalArgumentException("Invalid method argument(s) " + "to addBusinessDays(" + localDate + "," + days + "," + holidays + ")");
         }
 
@@ -329,7 +329,7 @@ public final class DateUtils {
         }
 
         if (formatPattern == null || StringUtils.isBlank(formatPattern)) {
-            formatPattern = "uuuu-MM-dd";
+            formatPattern = "yyyy-MM-dd";
         }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatPattern);
@@ -351,7 +351,7 @@ public final class DateUtils {
         }
 
         if (formatPattern == null || StringUtils.isBlank(formatPattern)) {
-            formatPattern = "uuuu-MM-dd'T'HH:mm:ss.SSSS";
+            formatPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS";
         }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formatPattern);

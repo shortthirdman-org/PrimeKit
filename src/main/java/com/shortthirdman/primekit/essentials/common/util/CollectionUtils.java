@@ -132,4 +132,14 @@ public final class CollectionUtils {
         }
         return result;
     }
+
+    /**
+     * Returns the given list or an empty list if null.
+     * @param list the input collection or list
+     * @param <T> the typed-data of items in collection
+     * @return the list of items
+     */
+    public static <T> List<T> toListOrEmpty(List<T> list) {
+        return list == null ? List.of() : list;
+    }
 }

@@ -4,7 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
+import java.util.Optional;
 
+/**
+ * Utility class for class loading and resource management.
+ * @author ShortThirdMan
+ * @version 1.0.0
+ */
 public final class ClassUtils {
 
     private ClassUtils() {
@@ -108,5 +115,16 @@ public final class ClassUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Safely casts an object using Java’s pattern matching.
+     * @param obj the object to cast
+     * @param type the class type to cast to
+     * @param <T> the type of the object
+     * @return an Optional containing the cast object if successful, or an empty Optional if the cast fails
+     */
+    public static <T> Optional<T> safeCast(Object obj, Class<T> type) {
+        return (!Objects.isNull(obj) && type.isInstance(obj)) ? Optional.of(type.cast(obj)) : Optional.empty();
     }
 }

@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Optional;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -107,7 +110,9 @@ public final class FileUtils {
     }
 
     /**
+     * Removes a directory and all its contents.
      * @param directory the directory to delete
+     * @return true if the directory was deleted, false otherwise
      */
     public static boolean removeDirectory(File directory) {
         boolean result = false;
@@ -127,6 +132,7 @@ public final class FileUtils {
     }
 
     /**
+     * Cleans the directory by removing all files and subdirectories.
      * @param directory the directory to clean
      */
     public static void cleanDirectory(File directory) {
@@ -138,5 +144,37 @@ public final class FileUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Reads the content of a file into a string.
+     * @param path the path to the file
+     * @return the content of the file as a string
+     * @throws IOException if an I/O error occurs
+     */
+    public static String readFileContent(Path path) throws IOException {
+        return Files.readString(path);
+    }
+
+    /**
+     * Writes a string to a file.
+     * @param path the path to the file
+     * @param content the content to write to the file
+     * @throws IOException if an I/O error occurs
+     */
+    public static void writeToFile(Path path, String content) throws IOException {
+        Files.writeString(path, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    /**
+     * Extracts the file extension from a filename.
+     * @param filename the filename
+     * @return the file extension, or an empty string if there is no extension
+     */
+    public static String getFileExtension(String filename) {
+        return Optional.ofNullable(filename)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(f.lastIndexOf('.') + 1))
+                .orElse("");
     }
 }

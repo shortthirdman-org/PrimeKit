@@ -3,6 +3,11 @@ package com.shortthirdman.primekit.essentials.common;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A class that represents a node in a tree structure with a count.
+ * @author ShortThirdMan
+ * @version 1.0.0
+ */
 @Getter
 @Setter
 public class CounterNode {

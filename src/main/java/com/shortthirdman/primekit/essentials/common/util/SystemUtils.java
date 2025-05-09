@@ -3,6 +3,7 @@ package com.shortthirdman.primekit.essentials.common.util;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Optional;
 
 public final class SystemUtils {
 
@@ -76,9 +77,8 @@ public final class SystemUtils {
      * @return int
      */
     private static int getPidWin(int port) {
-        String[] command = { "netstat", "-on" };
         try {
-            Process netstat = Runtime.getRuntime().exec(command);
+            Process netstat = Runtime.getRuntime().exec(new String[]{"netstat", "-on"});
 
             StringBuilder connectionList = new StringBuilder();
             Reader reader = new InputStreamReader(netstat.getInputStream());
@@ -129,9 +129,8 @@ public final class SystemUtils {
      * @return int
      */
     private static int getPidLinux(int port) {
-        String[] command = { "netstat", "-anp" };
         try {
-            Process netstat = Runtime.getRuntime().exec(command);
+            Process netstat = Runtime.getRuntime().exec(new String[]{"netstat", "-anp"});
 
             StringBuilder connectionList = new StringBuilder();
             Reader reader = new InputStreamReader(netstat.getInputStream());
@@ -150,7 +149,7 @@ public final class SystemUtils {
                     int idx = connection.indexOf("/soffice.bin");
                     int idx2 = idx;
                     while (Character.isDigit(connection.charAt(--idx2))) {
-                        System.out.println("");
+                        System.out.println("idx2: " + idx2);
                     }
                     pid = connection.substring(idx2 + 1, idx);
                 }
@@ -165,5 +164,15 @@ public final class SystemUtils {
         }
 
         return 0;
+    }
+
+    /**
+     * Fetches an environment variable or returns a default value.
+     * @param key the environment variable key
+     * @param defaultValue the default value to return if the key is not found
+     * @return the value of the environment variable or the default value
+     */
+    public static String getEnv(String key, String defaultValue) {
+        return Optional.ofNullable(System.getenv(key)).orElse(defaultValue);
     }
 }

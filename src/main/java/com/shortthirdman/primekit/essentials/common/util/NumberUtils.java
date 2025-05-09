@@ -7,7 +7,13 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Optional;
 
+/**
+ * Utility class for number formatting and manipulation.
+ * @author ShortThirdMan
+ * @version 1.0.0
+ */
 public final class NumberUtils {
 
     private NumberUtils() {
@@ -150,5 +156,25 @@ public final class NumberUtils {
         }
 
         return newFormattedString.toString();
+    }
+
+    /**
+     * Rounds a double value to two decimal places.
+     * @param value the input value
+     * @return the rounded value
+     */
+    public static double roundToTwoDecimals(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
+
+    /**
+     * Checks whether a string contains only digits.
+     * @param input the input string
+     * @return true if the string is numeric, false otherwise
+     */
+    public static boolean isNumeric(String input) {
+        return Optional.ofNullable(input)
+                .map(s -> s.matches("\\d+"))
+                .orElse(false);
     }
 }
