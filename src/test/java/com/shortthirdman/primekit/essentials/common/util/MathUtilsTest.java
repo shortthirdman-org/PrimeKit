@@ -1,25 +1,27 @@
-package com.shortthirdman.primekit.essentials;
+package com.shortthirdman.primekit.essentials.common.util;
 
-import com.shortthirdman.primekit.essentials.common.util.MathUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MathUtilsTests {
+class MathUtilsTest {
 
     @Test
     void testVariance() {
         double[] array = {1, 2, 3, 4, 5};
         int n = array.length;
-        assertEquals(2.5, MathUtils.variance(array, n));
+        assertEquals(2.0, MathUtils.variance(array, n));
+        assertNotEquals(2.5, MathUtils.variance(array, n));
     }
 
     @Test
     void testStandardDeviation() {
         double[] array = {1, 2, 3, 4, 5};
         int n = array.length;
-        assertEquals(1.5811388300841898, MathUtils.standardDeviation(array, n));
+        assertEquals(1.4142135623730951, MathUtils.standardDeviation(array, n));
+        assertNotEquals(1.5811388300841898, MathUtils.standardDeviation(array, n));
     }
 
     @Test

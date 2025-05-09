@@ -1,6 +1,5 @@
-package com.shortthirdman.primekit.essentials;
+package com.shortthirdman.primekit.essentials.common.util;
 
-import com.shortthirdman.primekit.essentials.common.util.CollectionUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -13,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CollectionUtilsTests {
+class CollectionUtilsTest {
 
     @Test
-    public void distinctByKeysTest() {
+    void distinctByKeysTest() {
         // Test with distinct keys
         Predicate<String> predicate = CollectionUtils.distinctByKeys(String::length);
         assertTrue(predicate.test("apple"));
@@ -31,7 +30,7 @@ public class CollectionUtilsTests {
     }
 
     @Test
-    public void sortByValueTest() {
+    void sortByValueTest() {
         // Test with normal map
         Map<String, Integer> map = new HashMap<>();
         map.put("apple", 5);

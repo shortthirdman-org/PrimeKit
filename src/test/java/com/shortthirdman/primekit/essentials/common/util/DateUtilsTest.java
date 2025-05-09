@@ -1,6 +1,4 @@
-package com.shortthirdman.primekit.essentials;
-
-import com.shortthirdman.primekit.essentials.common.util.DateUtils;
+package com.shortthirdman.primekit.essentials.common.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -132,26 +130,26 @@ public class DateUtilsTest {
 
     @Test
     public void givenDateString_parseStrictly() {
-        LocalDate expectedValue1 =  LocalDate.of(2019, 2, 27);
+        LocalDate expectedValue1 =  LocalDate.of(2019, Month.FEBRUARY, 27);
         assertEquals(expectedValue1, DateUtils.strictParseDate("2019-02-27", "yyyy-MM-dd"));
 
-        LocalDate expectedValue2 =  LocalDate.of(2019, 2, 28);
+        LocalDate expectedValue2 =  LocalDate.of(2019, Month.FEBRUARY, 28);
         assertEquals(expectedValue2, DateUtils.strictParseDate("2019-02-28", "yyyy-MM-dd"));
 
-        LocalDate expectedValue3 =  LocalDate.of(2019, 2, 29);
+        LocalDate expectedValue3 =  LocalDate.of(2019, Month.FEBRUARY, 29);
         assertEquals(expectedValue3, DateUtils.strictParseDate("2019-02-29", "yyyy-MM-dd"));
     }
 
     @Test
     public void givenDateTimeString_parseStrictly() {
-        LocalDateTime expectedValue1 = LocalDateTime.of(2019, 2, 27, 11, 23, 56, 1234);
-        assertEquals(expectedValue1, DateUtils.strictParseDateTime("2019-02-27T11:23:56.1234", null));
+        LocalDateTime expectedValue1 = LocalDateTime.of(2019, Month.FEBRUARY, 27, 11, 23, 56, 123400000);
+        assertEquals(expectedValue1, DateUtils.strictParseDateTime("2019-02-27'T'11:23:56.123400000", null));
 
-        LocalDateTime expectedValue2 = LocalDateTime.of(2019, 2, 27, 11, 23, 56, 1234);
-        assertEquals(expectedValue2, DateUtils.strictParseDateTime("2019-02-28T11:23:56.1234", null));
+        LocalDateTime expectedValue2 = LocalDateTime.of(2019, Month.FEBRUARY, 27, 11, 23, 56, 1234);
+        assertEquals(expectedValue2, DateUtils.strictParseDateTime("2019-02-28'T'11:23:56.1234", null));
 
-        LocalDateTime expectedValue3 = LocalDateTime.of(2019, 2, 27, 11, 23, 56, 1234);
-        assertEquals(expectedValue3, DateUtils.strictParseDateTime("2019-02-29T11:23:56.1234", null));
+        LocalDateTime expectedValue3 = LocalDateTime.of(2019, Month.FEBRUARY, 27, 11, 23, 56, 1234);
+        assertEquals(expectedValue3, DateUtils.strictParseDateTime("2019-02-29'T'11:23:56.1234", null));
     }
 
     @Test
