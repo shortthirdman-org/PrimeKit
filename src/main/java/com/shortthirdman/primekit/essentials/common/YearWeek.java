@@ -1,5 +1,8 @@
 package com.shortthirdman.primekit.essentials.common;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.text.MessageFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -25,6 +28,8 @@ public record YearWeek(int year, int week) {
         }
     }
 
+    @NotNull
+    @Contract(pure = true)
     @Override
     public String toString() {
         return MessageFormat.format("{0}-{1}", year, week);
